@@ -104,33 +104,27 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- SIDEBAR CONTENT ---
+# --- SIDEBAR & NAVIGATION SETUP ---
 with st.sidebar:
-    # Try to load your logo, otherwise use a generic medical icon
-    try:
-        st.image("logo.png", use_container_width=True) 
-    except:
-        # Replaced the "watch" with a Health/Medical Folder icon
-        st.image("website.png", width=80)
-        st.header("Digital Health & Analytics") 
+    st.image("https://cdn-icons-png.flaticon.com/512/2966/2966334.png", width=80)
+    st.header("Digital Health & Analytics")
     
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🧭 Menu")
+    st.write("Strategic Consulting for Healthcare Systems.")
     
-    # NAVIGATION BUTTONS
-    page = st.radio("Go to:", ["Home", "Our Services", "About Us", "Contact"], label_visibility="collapsed")
+    # Initialize session state if it doesn't exist
+    if 'page' not in st.session_state:
+        st.session_state.page = "Home"
+
+    # We add a 'key' to the radio button so we can change it programmatically!
+    page = st.radio(
+        "Navigate", 
+        ["Home", "Our Services", "About Us", "Contact"], 
+        key="page" 
+    )
     
     st.markdown("---")
-    
-    # STATUS BADGE
-    st.markdown("""
-    <div style="background-color: #d1fae5; padding: 10px; border-radius: 8px; border: 1px solid #6ee7b7; color: #065f46; font-size: 0.9rem; text-align: center;">
-        <strong>✅ OPEN FOR PROJECTS</strong>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("[Visit LinkedIn Page ↗](https://www.linkedin.com/company/111742935/)")
-
+    st.markdown("### 📞 Contact")
+    st.info("Harare, Zimbabwe\n\n+263 77 123 4567\n\nmisstsungie@gmail.com")
 # --- 1. HOME PAGE ---
 if page == "Home":
     st.markdown("""
@@ -170,7 +164,10 @@ if page == "Home":
             st.metric("Data Managed", "500k+", "Patient Records")
         with sub_c2:
             st.metric("Facilities", "700+", "Across Zimbabwe")
+
 # --- 2. SERVICES PAGE ---
+
+
 elif page == "Our Services":
     
     # Header Section with gradient underline
